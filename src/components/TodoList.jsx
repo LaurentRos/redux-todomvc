@@ -8,36 +8,32 @@ export default class TodoList extends React.Component {
     if (this.props.todos) {
       return this.props.todos.filter(
         (item) => this.props.filter === 'all' || item.get('status') === this.props.filter
-      );
+        );
     }
     return [];
   }
-  render() {
-    return <section className="main">
-      <ul className="todo-list">
-        // Only the filtered items are displayed
-        {this.getItems().map(item =>
-          <TodoItem key={item.get('text')}
-                    text={item.get('text')} />
-        )}
-      </ul>
-    </section>
-  }
-};
-
-// export default class TodoList extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
-//   }
-//   render() {
-//     return <section className="main">
-//       <ul className="todo-list">
-//         {this.props.todos.map(item =>
-//           <TodoItem key={item.get('text')}
-//                     text={item.get('text')} />
-//         )}
-//       </ul>
-//     </section>
-//   }
-// };
+    // This function checks whether an item is completed
+    isCompleted(item) {
+      return item.get('status') === 'completed';
+    }
+    render() {
+      return (
+        <section className="main">
+          <ul className="todo-list">
+            // Only the filtered items are displayed
+            {this.getItems().map(item =>
+              <TodoItem key={item.get('text')}
+              text={item.get('text')}
+                          // We pass down the info on completion and editing
+                          isCompleted={this.isCompleted(item)}
+                          isEditing={item.get('editing')}
+                          // We pass down the callback functions
+                          toggleComplete={this.props.toggleComplete}
+                          deleteItem={this.props.deleteItem}
+                          editItem={this.props.editItem}/>
+                          )}
+          </ul>
+        </section>
+      );
+    }
+  };
