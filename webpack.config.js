@@ -10,19 +10,22 @@ module.exports = {
       loaders: [{
         test: /\.jsx?$/,
         exclude: /node_modules/,
-      loader: 'react-hot!babel' // Include the react-hot loader
-    }]
-  },
-  resolve: {
-    extensions: ['', '.js', '.jsx']
-  },
-  output: {
-    path: __dirname + '/dist',
-    publicPath: '/',
-    filename: 'bundle.js'
-  },
-  devServer: {
-    contentBase: './dist',
+        loader: 'react-hot!babel'
+      }, {
+        test: /\.css$/,
+    loader: 'style!css' // We add the css loader
+  }]
+},
+resolve: {
+  extensions: ['', '.js', '.jsx']
+},
+output: {
+  path: __dirname + '/dist',
+  publicPath: '/',
+  filename: 'bundle.js'
+},
+devServer: {
+  contentBase: './dist',
     hot: true // Activate hot loading
   },
   plugins: [

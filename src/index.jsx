@@ -10,6 +10,8 @@ const todos = List.of(
   Map({id: 3, text: 'Immutable', status: 'completed', editing: false})
 );
 
+require('../node_modules/todomvc-app-css/index.css');
+
 ReactDOM.render(
   <TodoApp todos={todos} />,
   document.getElementById('app')
